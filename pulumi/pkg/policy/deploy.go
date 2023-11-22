@@ -10,14 +10,14 @@ type Policy struct {
 	Name string
 }
 
-func NewSchedule(ctx pulumi.Context, name string, schedule resourcepb.Resource_Policy, opts ...pulumi.ResourceOption) (*Policy, error) {
+func NewPolicy(ctx pulumi.Context, name string, schedule resourcepb.Resource_Policy, opts ...pulumi.ResourceOption) (*Policy, error) {
 	res := &Policy{Name: name}
 
 	if err := ctx.RegisterComponentResource("custom:policy:CustomPolicy", name, res, opts...); err != nil {
 		return nil, err
 	}
 
-	// TODO: Implement Schedule
+	// TODO: Implement Policy
 
 	return res, nil
 }
