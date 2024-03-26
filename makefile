@@ -15,7 +15,7 @@ deploybin: predeploybin
 
 .PHONY: install
 install: deploybin
-	@echo installing gcp deployment server to ${HOME}/.nitric/providers/custom/extension-aws-0.0.1
+	@echo installing extension deployment server to ${HOME}/.nitric/providers/custom/extension-0.0.1
 	@mkdir -p ${HOME}/.nitric/providers/custom/
-	@rm -f ${HOME}/.nitric/providers/custom/extension-aws-0.0.1
-	@cp bin/deploy-gcp ${HOME}/.nitric/providers/custom/extension-aws-0.0.1
+	@rm -f ${HOME}/.nitric/providers/custom/extension-0.0.1
+	@cp bin/deploy-extension ${HOME}/.nitric/providers/custom/extension-0.0.1
