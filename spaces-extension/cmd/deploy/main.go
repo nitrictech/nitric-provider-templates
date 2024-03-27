@@ -19,7 +19,7 @@ package main
 import (
 	_ "embed"
 
-	"github.com/nitrictech/nitric/cloud/aws/deploy"
+	"github.com/nitrictech/nitric-provider-template/spaces-extension/deploy"
 	"github.com/nitrictech/nitric/cloud/common/deploy/provider"
 )
 
@@ -32,7 +32,7 @@ var runtimeProvider = func() []byte {
 
 // Start the deployment server
 func main() {
-	stack := deploy.NewNitricAwsProvider()
+	stack := deploy.NewAwsExtensionProvider()
 
 	providerServer := provider.NewPulumiProviderServer(stack, runtimeProvider)
 

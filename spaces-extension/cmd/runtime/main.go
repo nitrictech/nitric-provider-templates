@@ -15,6 +15,7 @@
 package main
 
 import (
+	spaces_service "extend-provider-example/cmd/runtime/storage"
 	"os"
 	"os/signal"
 	"syscall"
@@ -26,7 +27,6 @@ import (
 	sqs_service "github.com/nitrictech/nitric/cloud/aws/runtime/queue"
 	"github.com/nitrictech/nitric/cloud/aws/runtime/resource"
 	secrets_manager_secret_service "github.com/nitrictech/nitric/cloud/aws/runtime/secret"
-	s3_service "github.com/nitrictech/nitric/cloud/aws/runtime/storage"
 	sns_service "github.com/nitrictech/nitric/cloud/aws/runtime/topic"
 	"github.com/nitrictech/nitric/cloud/aws/runtime/websocket"
 	base_http "github.com/nitrictech/nitric/cloud/common/runtime/gateway"
@@ -63,7 +63,7 @@ func main() {
 	membraneOpts.SecretManagerPlugin, _ = secrets_manager_secret_service.New(provider)
 	membraneOpts.KeyValuePlugin, _ = dynamodb_service.New(provider)
 	membraneOpts.TopicsPlugin, _ = sns_service.New(provider)
-	membraneOpts.StoragePlugin, _ = s3_service.New(provider)
+	membraneOpts.StoragePlugin, _ = spaces_service.New(provider)
 	membraneOpts.ResourcesPlugin = provider
 	membraneOpts.WebsocketPlugin, _ = websocket.NewAwsApiGatewayWebsocket(provider)
 	membraneOpts.QueuesPlugin, _ = sqs_service.New(provider)
