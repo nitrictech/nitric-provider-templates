@@ -1,4 +1,4 @@
-module extend-provider-example
+module github.com/nitrictech/nitric-provider-template/extension
 
 go 1.21.4
 
