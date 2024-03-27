@@ -14,19 +14,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package deploy
 
-import (
-	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/deploy"
-	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/deploy/runtime"
-	"github.com/nitrictech/nitric/cloud/common/deploy/provider"
-)
+type Config struct {
+}
 
-// Start the deployment server
-func main() {
-	stack := deploy.NewNitricCustomPulumiProvider()
-
-	providerServer := provider.NewPulumiProviderServer(stack, runtime.NitricCustomRuntime)
-
-	providerServer.Start()
+// Return Config from stack attributes
+func ConfigFromAttributes(attributes map[string]interface{}) (*Config, error) {
+	return &Config{}, nil
 }

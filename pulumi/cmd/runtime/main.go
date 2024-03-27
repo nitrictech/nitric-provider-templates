@@ -1,19 +1,34 @@
+// Copyright 2021 Nitric Pty Ltd.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
 import (
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/eapache/queue"
-	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/topic"
-	"github.com/nitrictech/nitric/cloud/aws/runtime/core"
-	"github.com/nitrictech/nitric/cloud/aws/runtime/websocket"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/http"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/keyvalue"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/resource"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/secret"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/storage"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/topic"
+	"github.com/nitrictech/nitric-provider-template/pulumi/pkg/runtime/websocket"
+
+	"github.com/nitrictech/nitric/core/pkg/logger"
 	"github.com/nitrictech/nitric/core/pkg/membrane"
-	"github.com/nitrictech/nitric/core/pkg/utils"
-	"github.com/viant/toolbox/secret"
-	"google.golang.org/api/storage/v1"
 )
 
 func main() {
@@ -21,36 +36,27 @@ func main() {
 	signal.Notify(term, os.Interrupt, syscall.SIGTERM)
 	signal.Notify(term, os.Interrupt, syscall.SIGINT)
 
-	gatewayEnv := utils.GetEnv("GATEWAY_ENVIRONMENT", "lambda")
-
 	membraneOpts := membrane.DefaultMembraneOptions()
 
-	provider, err := core.New()
+	provider, err := resource.New()
 	if err != nil {
-		log.Fatalf("could not create aws provider: %v", err)
+		logger.Fatalf("could not create aws provider: %v", err)
 		return
 	}
 
 	// Load the appropriate gateway based on the environment.
-	switch gatewayEnv {
-	case "lambda":
-		membraneOpts.GatewayPlugin, _ = lambda_service.New(provider)
-	default:
-		membraneOpts.GatewayPlugin, _ = base_http.New(nil)
-	}
+	membraneOpts.GatewayPlugin, _ = http.NewHttpGateway(nil)
 
-	membraneOpts.SecretPlugin, _ = secret.NewServer()
-	membraneOpts.DocumentPlugin, _ = document.NewServer()
-	membraneOpts.EventsPlugin, _ = topic.NewServer()
-	membraneOpts.QueuePlugin, _ = queue.NewServer()
-	membraneOpts.StoragePlugin = storage.NewServer()
-	// membraneOpts.ResourcesPlugin = provider
-	membraneOpts.CreateTracerProvider = newTracerProvider
-	membraneOpts.WebsocketPlugin = websocket.NewServer()
+	membraneOpts.SecretManagerPlugin, _ = secret.New(provider)
+	membraneOpts.KeyValuePlugin, _ = keyvalue.New(provider)
+	membraneOpts.TopicsPlugin, _ = topic.New(provider)
+	membraneOpts.StoragePlugin, _ = storage.New(provider)
+	membraneOpts.ResourcesPlugin = provider
+	membraneOpts.WebsocketPlugin, _ = websocket.New(provider)
 
 	m, err := membrane.New(membraneOpts)
 	if err != nil {
-		log.Default().Fatalf("There was an error initialising the membrane server: %v", err)
+		logger.Fatalf("There was an error initializing the membrane server: %v", err)
 	}
 
 	errChan := make(chan error)
@@ -61,9 +67,9 @@ func main() {
 
 	select {
 	case membraneError := <-errChan:
-		log.Default().Printf("Membrane Error: %v, exiting\n", membraneError)
+		logger.Errorf("Membrane Error: %v, exiting\n", membraneError)
 	case sigTerm := <-term:
-		log.Default().Printf("Received %v, exiting\n", sigTerm)
+		logger.Debugf("Received %v, exiting\n", sigTerm)
 	}
 
 	m.Stop()
