@@ -8,7 +8,7 @@ type CustomAwsExtensionProvider struct {
 	*deploy.NitricAwsPulumiProvider
 }
 
-func NewCustomAwsSupabaseProvider() *CustomAwsExtensionProvider {
+func NewCustomAwsExtensionProvider() *CustomAwsExtensionProvider {
 	return &CustomAwsExtensionProvider{
 		NitricAwsPulumiProvider: deploy.NewNitricAwsProvider(),
 	}
