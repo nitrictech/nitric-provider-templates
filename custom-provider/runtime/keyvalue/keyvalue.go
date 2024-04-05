@@ -3,7 +3,7 @@ package keyvalue
 import (
 	"context"
 
-	"github.com/nitrictech/nitric-provider-template/custom-provider/pkg/runtime/resource"
+	"github.com/nitrictech/nitric-provider-template/custom-provider/runtime/resource"
 	kvstorepb "github.com/nitrictech/nitric/core/pkg/proto/kvstore/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

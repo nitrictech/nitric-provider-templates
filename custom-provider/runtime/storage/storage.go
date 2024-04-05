@@ -3,7 +3,7 @@ package storage
 import (
 	"context"
 
-	"github.com/nitrictech/nitric-provider-template/custom-provider/pkg/runtime/resource"
+	"github.com/nitrictech/nitric-provider-template/custom-provider/runtime/resource"
 	storagepb "github.com/nitrictech/nitric/core/pkg/proto/storage/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

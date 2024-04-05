@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 
-	"github.com/nitrictech/nitric-provider-template/custom-provider/pkg/runtime/resource"
+	"github.com/nitrictech/nitric-provider-template/custom-provider/runtime/resource"
 	apipb "github.com/nitrictech/nitric/core/pkg/proto/apis/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
