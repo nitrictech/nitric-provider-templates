@@ -8,9 +8,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.51.1
 	github.com/aws/smithy-go v1.20.1
 	github.com/mitchellh/mapstructure v1.5.0
-	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/cloud/common v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/core v0.0.0-20240306002339-84e4a6333466
+	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/cloud/common v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/core v0.0.0-20240405035939-8c042fec5984
 	github.com/pulumi/pulumi-digitalocean/sdk/v4 v4.27.0
 	github.com/pulumi/pulumi/sdk/v3 v3.108.1
 	github.com/samber/lo v1.39.0

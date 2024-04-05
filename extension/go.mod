@@ -3,9 +3,9 @@ module github.com/nitrictech/nitric-provider-template/extension
 go 1.21.4
 
 require (
-	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/cloud/common v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/core v0.0.0-20240306002339-84e4a6333466
+	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/cloud/common v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/core v0.0.0-20240405035939-8c042fec5984
 )
 
 require (
