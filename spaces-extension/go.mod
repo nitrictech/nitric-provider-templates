@@ -7,11 +7,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.51.1
 	github.com/aws/smithy-go v1.20.1
-	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/cloud/common v0.0.0-20240306002339-84e4a6333466
-	github.com/nitrictech/nitric/core v0.0.0-20240306002339-84e4a6333466
+	github.com/mitchellh/mapstructure v1.5.0
+	github.com/nitrictech/nitric/cloud/aws v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/cloud/common v0.0.0-20240405035939-8c042fec5984
+	github.com/nitrictech/nitric/core v0.0.0-20240405035939-8c042fec5984
 	github.com/pulumi/pulumi-digitalocean/sdk/v4 v4.27.0
 	github.com/pulumi/pulumi/sdk/v3 v3.108.1
+	github.com/samber/lo v1.39.0
 	google.golang.org/grpc v1.59.0
 )
 
@@ -102,7 +104,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
-	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
@@ -127,7 +128,6 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect
-	github.com/samber/lo v1.39.0 // indirect
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.0 // indirect
 	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect

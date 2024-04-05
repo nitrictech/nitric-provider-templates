@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package spaces_service
+package storage
 
 import (
 	"bytes"
@@ -37,29 +37,21 @@ import (
 	storagepb "github.com/nitrictech/nitric/core/pkg/proto/storage/v1"
 )
 
-const (
-	// ErrCodeNoSuchTagSet - AWS API neglects to include a constant for this error code.
-	ErrCodeNoSuchTagSet = "NoSuchTagSet"
-	ErrCodeAccessDenied = "AccessDenied"
-)
-
 // SpacesStorageService - an AWS S3 implementation of the Nitric Storage Service
 type SpacesStorageService struct {
 	s3Client      s3iface.S3API
 	preSignClient s3iface.PreSignAPI
 	provider      resource.AwsResourceProvider
-	selector      BucketSelector
 }
 
 var _ storagepb.StorageServer = (*SpacesStorageService)(nil)
-
-type BucketSelector = func(nitricName string) (*string, error)
 
 func isS3AccessDeniedErr(err error) bool {
 	var opErr *smithy.OperationError
 	if errors.As(err, &opErr) {
 		return opErr.Service() == "S3" && strings.Contains(opErr.Unwrap().Error(), "AccessDenied")
 	}
+
 	return false
 }
 
