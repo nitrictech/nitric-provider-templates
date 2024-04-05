@@ -15,10 +15,11 @@
 package main
 
 import (
-	spaces_service "extend-provider-example/cmd/runtime/storage"
 	"os"
 	"os/signal"
 	"syscall"
+
+	spaces_service "github.com/nitrictech/nitric-provider-template/spaces-extension/runtime/storage"
 
 	"github.com/nitrictech/nitric/cloud/aws/runtime/api"
 	"github.com/nitrictech/nitric/cloud/aws/runtime/env"

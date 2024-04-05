@@ -17,8 +17,12 @@ func (a *AwsExtensionProvider) Policy(ctx *pulumi.Context, parent pulumi.Resourc
 	})
 
 	filteredConfig.Actions = lo.Filter(config.Actions, func(res resourcespb.Action, idx int) bool {
-		// Bucket permissions are < 0-99
-		return res > 100
+		return !lo.Contains([]resourcespb.Action{
+			resourcespb.Action_BucketFileDelete,
+			resourcespb.Action_BucketFileGet,
+			resourcespb.Action_BucketFileList,
+			resourcespb.Action_BucketFilePut,
+		}, res)
 	})
 
 	if len(filteredConfig.Actions) == 0 {
