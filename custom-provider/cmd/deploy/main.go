@@ -18,7 +18,7 @@ var runtimeProvider = func() []byte {
 func main() {
 	stack := deploy.NewNitricCustomPulumiProvider()
 
-	providerServer := provider.NewPulumiProviderServer(stack, runtime.NitricCustomRuntime)
+	providerServer := provider.NewPulumiProviderServer(stack, runtimeProvider)
 
 	providerServer.Start()
 }
