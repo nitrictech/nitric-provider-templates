@@ -123,7 +123,7 @@ require (
 	github.com/pulumi/esc v0.6.2 // indirect
 	github.com/pulumi/pulumi-aws/sdk/v5 v5.26.0 // indirect
 	github.com/pulumi/pulumi-docker/sdk/v4 v4.1.0 // indirect
-	github.com/pulumi/pulumi-random/sdk/v4 v4.14.0 // indirect
+	github.com/pulumi/pulumi-random/sdk/v4 v4.8.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
