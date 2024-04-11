@@ -1,0 +1,23 @@
+{
+  "language": "go",
+  "app": "go run main.go",
+  "codeMakerOutput": "generated",
+  "projectId": "f6d9ee5d-8297-41bd-a100-7bf82c46346d",
+  "sendCrashReports": "false",
+  "terraformProviders": [],
+  "terraformModules": [
+    {
+      "name": "cloudrun",
+      "source": "./modules/cloudrun"
+    },
+    {
+      "name": "api",
+      "source": "./modules/api"
+    },
+    {
+      "name": "storage",
+      "source": "./modules/storage"
+    }
+  ],
+  "context": {}
+}
