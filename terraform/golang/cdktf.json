@@ -17,6 +17,10 @@
     {
       "name": "storage",
       "source": "./modules/storage"
+    },
+    {
+      "name": "policies",
+      "source": "./modules/policies"
     }
   ],
   "context": {}
