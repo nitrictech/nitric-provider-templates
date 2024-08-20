@@ -22,7 +22,7 @@ func (*ResourceServer) Declare(context.Context, *resourcepb.ResourceDeclareReque
 
 // Retrieve details about a resource at runtime
 func (*ResourceServer) Details(context.Context, *resourcepb.ResourceDeclareRequest) (*resourcepb.ResourceDeclareResponse, error) {
-	return nil, status.New(codes.Unimplemented, "Unimplemented").Err()
+	return nil, status.Error(codes.Unimplemented, "Unimplemented")
 }
 
 func New() (*ResourceServer, error) {

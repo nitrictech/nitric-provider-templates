@@ -9,7 +9,6 @@ import (
 	"github.com/nitrictech/nitric/cloud/common/deploy"
 	"github.com/nitrictech/nitric/cloud/common/deploy/provider"
 	"github.com/nitrictech/nitric/cloud/common/deploy/pulumix"
-	"github.com/pulumi/pulumi-random/sdk/v4/go/random"
 	"github.com/pulumi/pulumi/sdk/v3/go/auto"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 
@@ -45,32 +44,14 @@ func (a *NitricCustomPulumiProvider) Init(attributes map[string]interface{}) err
 
 	a.config, err = ConfigFromAttributes(attributes)
 	if err != nil {
-		return status.Errorf(codes.InvalidArgument, "Bad stack configuration: %s", err)
+		return status.Errorf(codes.InvalidArgument, "bad stack configuration: %s", err)
 	}
 
 	return nil
 }
 
 func (a *NitricCustomPulumiProvider) Pre(ctx *pulumi.Context, resources []*pulumix.NitricPulumiResource[any]) error {
-	// make our random stackId
-	stackRandId, err := random.NewRandomString(ctx, fmt.Sprintf("%s-stack-name", ctx.Stack()), &random.RandomStringArgs{
-		Special: pulumi.Bool(false),
-		Length:  pulumi.Int(8),
-		Keepers: pulumi.ToStringMap(map[string]string{
-			"stack-name": ctx.Stack(),
-		}),
-	})
-	if err != nil {
-		return err
-	}
-
-	stackIdChan := make(chan string)
-	pulumi.Sprintf("%s-%s", ctx.Stack(), stackRandId.Result).ApplyT(func(id string) string {
-		stackIdChan <- id
-		return id
-	})
-
-	a.StackId = <-stackIdChan
+	// Implement pre-deployment logic here, typically this is a good place to generate a random stack id
 
 	return nil
 }
@@ -82,9 +63,9 @@ func (a *NitricCustomPulumiProvider) Post(ctx *pulumi.Context) error {
 func (a *NitricCustomPulumiProvider) Result(ctx *pulumi.Context) (pulumi.StringOutput, error) {
 	outputs := []interface{}{}
 
-	output, ok := pulumi.All(outputs...).ApplyT(func(deets []interface{}) string {
-		stringyOutputs := make([]string, len(deets))
-		for i, d := range deets {
+	output, ok := pulumi.All(outputs...).ApplyT(func(details []interface{}) string {
+		stringyOutputs := make([]string, len(details))
+		for i, d := range details {
 			stringyOutputs[i] = d.(string)
 		}
 
@@ -92,7 +73,7 @@ func (a *NitricCustomPulumiProvider) Result(ctx *pulumi.Context) (pulumi.StringO
 	}).(pulumi.StringOutput)
 
 	if !ok {
-		return pulumi.StringOutput{}, fmt.Errorf("Failed to generate pulumi output")
+		return pulumi.StringOutput{}, fmt.Errorf("failed to generate pulumi output")
 	}
 
 	return output, nil

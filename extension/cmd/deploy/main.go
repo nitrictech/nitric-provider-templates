@@ -3,11 +3,11 @@ package main
 import (
 	_ "embed"
 
-	"github.com/nitrictech/nitric/cloud/aws/deploy"
+	"github.com/nitrictech/nitric-provider-templates/extension/deploy"
 	"github.com/nitrictech/nitric/cloud/common/deploy/provider"
 )
 
-//go:embed runtime-extension-aws
+//go:embed runtime-bin
 var runtimeBin []byte
 
 var runtimeProvider = func() []byte {
@@ -16,7 +16,7 @@ var runtimeProvider = func() []byte {
 
 // Start the deployment server
 func main() {
-	stack := deploy.NewCustomAwsExtensionProvider()
+	stack := deploy.NewExtendedAwsProvider()
 
 	providerServer := provider.NewPulumiProviderServer(stack, runtimeProvider)
 

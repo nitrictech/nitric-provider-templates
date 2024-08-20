@@ -1,9 +1,8 @@
-package keyvalue
+package queue
 
 import (
 	"context"
 
-	"github.com/nitrictech/nitric-provider-template/custom-provider/runtime/resource"
 	queuespb "github.com/nitrictech/nitric/core/pkg/proto/queues/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -15,19 +14,19 @@ var _ queuespb.QueuesServer = &QueuesServer{}
 
 // Complete implements queuespb.QueuesServer.
 func (*QueuesServer) Complete(context.Context, *queuespb.QueueCompleteRequest) (*queuespb.QueueCompleteResponse, error) {
-	return nil, status.New(codes.Unimplemented, "Unimplemented").Err()
+	return nil, status.Error(codes.Unimplemented, "Unimplemented")
 }
 
 // Dequeue implements queuespb.QueuesServer.
 func (*QueuesServer) Dequeue(context.Context, *queuespb.QueueDequeueRequest) (*queuespb.QueueDequeueResponse, error) {
-	return nil, status.New(codes.Unimplemented, "Unimplemented").Err()
+	return nil, status.Error(codes.Unimplemented, "Unimplemented")
 }
 
 // Enqueue implements queuespb.QueuesServer.
 func (*QueuesServer) Enqueue(context.Context, *queuespb.QueueEnqueueRequest) (*queuespb.QueueEnqueueResponse, error) {
-	return nil, status.New(codes.Unimplemented, "Unimplemented").Err()
+	return nil, status.Error(codes.Unimplemented, "Unimplemented")
 }
 
-func New(provider *resource.ResourceServer) (*QueuesServer, error) {
+func New() (*QueuesServer, error) {
 	return &QueuesServer{}, nil
 }

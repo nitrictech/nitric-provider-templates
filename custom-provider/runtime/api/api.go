@@ -3,26 +3,22 @@ package api
 import (
 	"context"
 
-	"github.com/nitrictech/nitric-provider-template/custom-provider/runtime/resource"
 	apipb "github.com/nitrictech/nitric/core/pkg/proto/apis/v1"
+	"github.com/nitrictech/nitric/core/pkg/workers/apis"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-type ApiServer struct{}
+type ApiServer struct {
+	*apis.RouteWorkerManager
+}
 
 var _ apipb.ApiServer = &ApiServer{}
 
-// ApiDetails implements apispb.ApiServer.
 func (*ApiServer) ApiDetails(context.Context, *apipb.ApiDetailsRequest) (*apipb.ApiDetailsResponse, error) {
-	return nil, status.New(codes.Unimplemented, "Unimplemented").Err()
+	return nil, status.Error(codes.Unimplemented, "Unimplemented")
 }
 
-// Serve implements apispb.ApiServer.
-func (*ApiServer) Serve(apipb.Api_ServeServer) error {
-	return status.New(codes.Unimplemented, "Unimplemented").Err()
-}
-
-func New(provider *resource.ResourceServer) (*ApiServer, error) {
+func New() (*ApiServer, error) {
 	return &ApiServer{}, nil
 }
